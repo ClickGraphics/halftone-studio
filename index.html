@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101114">
+  <title>HALFTONE STUDIO — Image Processing Lab</title>
+  <meta name="description" content="Herramienta local para crear efectos halftone y exportar PNG transparente en alta resolución.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">H</span><span>HALFTONE <b>STUDIO</b><small>IMAGE PROCESSING LAB</small></span></a>
+    <div class="top-actions"><span class="local-pill"><i></i> PROCESAMIENTO LOCAL</span><button id="resetBtn" class="quiet">Restablecer</button></div>
+  </header>
+  <main class="shell">
+    <section class="intro"><div><p class="eyebrow">PRINT LAB / VERSION 0.1</p><h1>Convierte imágenes.<br><em>Imprime diferente.</em></h1><p class="sub">Genera patrones de semitono, ajusta el resultado y exporta PNG de alta resolución. Tus imágenes se procesan en este navegador.</p></div><div class="version">BETA<br><strong>01</strong></div></section>
+    <section class="workspace">
+      <aside class="controls">
+        <div class="panel-head"><span>01 / SOURCE</span><span class="muted">IMAGEN</span></div>
+        <label id="dropZone" class="dropzone" for="fileInput"><input id="fileInput" type="file" accept="image/*"><span class="upload-icon">↑</span><strong>Arrastra tu imagen aquí</strong><small>o haz clic para seleccionar · JPG, PNG, WEBP</small></label>
+        <div id="fileMeta" class="file-meta">Ninguna imagen cargada</div>
+        <div class="panel-head section-head"><span>02 / PATTERN</span><span class="muted">ESTILO</span></div>
+        <div class="mode-grid"><button class="mode active" data-mode="dots"><span class="mode-preview dots"></span><b>Puntos</b><small>Classic halftone</small></button><button class="mode" data-mode="lines"><span class="mode-preview lines"></span><b>Líneas</b><small>Line screen</small></button><button class="mode" data-mode="diffusion"><span class="mode-preview diffuse"></span><b>Difusión</b><small>Ordered grain</small></button></div>
+        <div class="panel-head section-head"><span>03 / ADJUSTMENTS</span><span class="muted">AJUSTES</span></div>
+        <div class="control"><div class="label-row"><label for="cellSize">Frecuencia / tamaño</label><output id="cellSizeVal">12 px</output></div><input id="cellSize" type="range" min="3" max="48" value="12"></div>
+        <div class="control"><div class="label-row"><label for="angle">Ángulo</label><output id="angleVal">45°</output></div><input id="angle" type="range" min="0" max="180" value="45"></div>
+        <div class="control"><div class="label-row"><label for="contrast">Contraste</label><output id="contrastVal">1.20</output></div><input id="contrast" type="range" min="0.5" max="2.5" step="0.05" value="1.2"></div>
+        <div class="control"><div class="label-row"><label for="gamma">Gamma</label><output id="gammaVal">1.00</output></div><input id="gamma" type="range" min="0.4" max="2.2" step="0.05" value="1"></div>
+        <div class="control"><div class="label-row"><label for="threshold">Umbral de difusión</label><output id="thresholdVal">128</output></div><input id="threshold" type="range" min="32" max="224" value="128"></div>
+        <div class="panel-head section-head"><span>04 / OUTPUT</span><span class="muted">EXPORTACIÓN</span></div>
+        <label class="toggle"><input id="transparent" type="checkbox" checked><span class="switch"></span><span><b>Fondo transparente</b><small>Elimina el fondo blanco del resultado</small></span></label>
+        <label class="toggle"><input id="invert" type="checkbox"><span class="switch"></span><span><b>Invertir para prenda oscura</b><small>Genera tinta blanca para fondos oscuros</small></span></label>
+        <div class="control select-control"><label for="dpi">Resolución de exportación</label><select id="dpi"><option value="300" selected>300 DPI</option><option value="150">150 DPI</option><option value="600">600 DPI</option></select></div>
+        <button id="downloadBtn" class="download" disabled><span>↓</span> EXPORTAR PNG <small>ALTA RESOLUCIÓN</small></button><p class="privacy-note">🔒 La imagen no se envía a ningún servidor.</p>
+      </aside>
+      <section class="preview-panel"><div class="preview-top"><div><span class="panel-kicker">LIVE PREVIEW</span><h2>Vista previa</h2></div><div class="preview-tools"><span id="dimensionLabel">— × — px</span><button id="fitBtn" title="Ajustar vista">AJUSTAR</button></div></div><div id="previewStage" class="preview-stage"><div id="emptyState" class="empty-state"><div class="empty-symbol">◉</div><b>Tu lienzo está esperando</b><span>Carga una imagen para comenzar a crear.</span></div><canvas id="previewCanvas"></canvas></div><div class="preview-footer"><span><i class="live-dot"></i> <b id="statusText">EN ESPERA</b></span><span>PNG / RGBA / CLIENT-SIDE</span></div></section>
+    </section>
+    <footer><span>HALFTONE STUDIO © 2026</span><span>HECHO PARA DISEÑO · DTF · SERIGRAFÍA</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
